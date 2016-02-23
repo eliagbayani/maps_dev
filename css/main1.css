@@ -24,7 +24,7 @@ body {
     background: white; /* needed bec. fullscreen in Firefox makes background color black */
 }
 
-#map {
+#map-canvas {
     height: 100%; /* 100% */
 }
 
@@ -51,6 +51,7 @@ body {
 .title:hover, #goBackUI:hover, #goNextUI:hover, #goOrigUI:hover, #goRadioUI:hover, #goPanelUI:hover, #goFullUI:hover {
     background: #e0ecff;
 }
+
 .info {
     width: 400px;
 }

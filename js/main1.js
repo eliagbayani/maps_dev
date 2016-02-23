@@ -9,24 +9,24 @@ function $(element) {
   return document.getElementById(element);
 }
 
-var speedTest = {};
+var EoLMap = {};
 
-speedTest.recs = null;
-speedTest.map = null;
-speedTest.markerClusterer = null;
-speedTest.markers = [];
-speedTest.infoWindow = null;
+EoLMap.recs = null;
+EoLMap.map = null;
+EoLMap.markerClusterer = null;
+EoLMap.markers = [];
+EoLMap.infoWindow = null;
 
 var markerSpiderfier = null;
 
 var statuz = [];        //for back button
 var statuz_all = [];    //for next button
-
 var initial_map = false;
 
 
 //start customized controls
 function CenterControl(controlDiv, map) {
+    
     // Set CSS for GO BACK
     var goBackUI = document.createElement('div');
     goBackUI.id = 'goBackUI';                       //.id here is used in HTML <style>
@@ -96,9 +96,9 @@ function CenterControl(controlDiv, map) {
 //===========
 
     // Set up the click event listener
-    goBackUI.addEventListener('click', function() {speedTest.back();});
-    goNextUI.addEventListener('click', function() {speedTest.next();});
-    goOrigUI.addEventListener('click', function() {speedTest.map.setOptions(initial_map);
+    goBackUI.addEventListener('click', function() {EoLMap.back();});
+    goNextUI.addEventListener('click', function() {EoLMap.next();});
+    goOrigUI.addEventListener('click', function() {EoLMap.map.setOptions(initial_map);
         statuz = [];
         statuz_all = [];
         });
@@ -110,114 +110,29 @@ function CenterControl(controlDiv, map) {
 }
 //end customized controls
 
-function goFullScreen()
-{
-    var elem = document.getElementById("gmap"); //gmap or map-container
-
-    // if (elem.requestFullscreen)         {elem.requestFullscreen();} 
-    // else if (elem.msRequestFullscreen)  {elem.msRequestFullscreen();} 
-    // else if (elem.mozRequestFullScreen) {elem.mozRequestFullScreen();} //Firefox 
-    // else if (elem.webkitRequestFullscreen) //Chrome and Safari
-    // {
-    //     // elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-    //     elem.style.width = "100%";
-    //     elem.style.height = "100%";
-    //     elem.webkitRequestFullscreen();
-    // }
-
-    if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) 
-    {  // current working methods
-      $('goFullText').innerHTML = "Fullscreen ON";
-      if      (elem.requestFullscreen)      {elem.requestFullscreen();} 
-      else if (elem.msRequestFullscreen)    {elem.msRequestFullscreen();} 
-      else if (elem.mozRequestFullScreen)   {elem.mozRequestFullScreen();} 
-      else if (elem.webkitRequestFullscreen) {
-        elem.style.width = "100%";
-        elem.style.height = "100%";
-        
-
-        elem.webkitRequestFullscreen(); //Element.ALLOW_KEYBOARD_INPUT
-        // panelShowHide();
-        // panelShowHide();
-        // speedTest.change();
-        
-      }
-    } else
-    {
-      $('goFullText').innerHTML = "Fullscreen OFF";
-      if      (document.exitFullscreen) {document.exitFullscreen();} 
-      else if (document.msExitFullscreen) {document.msExitFullscreen();} 
-      else if (document.mozCancelFullScreen) {document.mozCancelFullScreen();} 
-      else if (document.webkitExitFullscreen) {
-        elem.style.width = "";
-        document.webkitExitFullscreen();
-      }
-    }
-
-    google.maps.event.trigger(speedTest.map, 'resize');
-    
-}
-
-// start: listeners for fullscreenchanges
-if (document.addEventListener) {
-    document.addEventListener('webkitfullscreenchange', exitHandler, false);
-    document.addEventListener('mozfullscreenchange', exitHandler, false);
-    document.addEventListener('fullscreenchange', exitHandler, false);
-    document.addEventListener('MSFullscreenChange', exitHandler, false);
-}
-function exitHandler() {
-    if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null)
-    {
-        if(!document.webkitIsFullScreen)
-        {
-            $('goFullText').innerHTML = "Fullscreen OFF2";
-            var elem = document.getElementById("gmap"); //gmap or map-container
-            elem.style.width = "";
-        }
-        if(document.mozFullScreen) $('goFullText').innerHTML = "Fullscreen ON2";
-    }
-}
-// end: listeners for fullscreenchanges
-
-function panelShowHide()
-{
-    var el = document.getElementById("panel");
-    if ($('goPanelText').innerHTML == "Panel ON")
-    {
-        $('goPanelText').innerHTML = "Panel OFF";
-        // el.style.display = 'none';
-        el.style.width = 0;
-    }
-    else
-    {
-        $('goPanelText').innerHTML = "Panel ON";
-        // el.style.display = 'block';
-        el.style.width = "17%";
-    }
-    google.maps.event.trigger(speedTest.map, 'resize');
-}
+//common.css
 
 function clustersOnOff()
 {
     if ($('goRadioText').innerHTML == "Clusters ON") {$('goRadioText').innerHTML = "Clusters OFF";}
     else                                             {$('goRadioText').innerHTML = "Clusters ON";}
-    speedTest.change();
+    EoLMap.change();
 }
 
 function get_center_lat_long()
 {
     var bound = new google.maps.LatLngBounds();
-    speedTest.recs = data.records;
-    var numMarkers = speedTest.recs.length;
+    EoLMap.recs = data.records;
+    var numMarkers = EoLMap.recs.length;
     for (var i = 0; i < numMarkers; i++) 
     {
-      bound.extend( new google.maps.LatLng(speedTest.recs[i].lat, speedTest.recs[i].lon) );
+      bound.extend( new google.maps.LatLng(EoLMap.recs[i].lat, EoLMap.recs[i].lon) );
     }
     // console.log( bound.getCenter() );
     return bound.getCenter();
 }
 
-speedTest.init = function() {
+EoLMap.init = function() {
 
   //start centering map
   center_latlong = get_center_lat_long()
@@ -232,18 +147,18 @@ speedTest.init = function() {
     'scaleControl': true
   };
 
-  speedTest.map = new google.maps.Map($('map'), options);
+  EoLMap.map = new google.maps.Map($('map-canvas'), options);
 
   //start customized controls
     var centerControlDiv = document.createElement('div');
-    var centerControl = new CenterControl(centerControlDiv, speedTest.map);
+    var centerControl = new CenterControl(centerControlDiv, EoLMap.map);
     centerControlDiv.index = 1;
     centerControlDiv.style['padding-top'] = '10px';
-    speedTest.map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+    EoLMap.map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
   //end customized controls
 
-  speedTest.recs = data.records;
-  speedTest.map.enableKeyDragZoom();  //for key-drag-zoom
+  EoLMap.recs = data.records;
+  EoLMap.map.enableKeyDragZoom();  //for key-drag-zoom
   
   //start spiderfy
   var spiderConfig = {
@@ -251,68 +166,33 @@ speedTest.init = function() {
           event: 'mouseover'
       };
       
-  markerSpiderfier = new OverlappingMarkerSpiderfier(speedTest.map, spiderConfig);
+  markerSpiderfier = new OverlappingMarkerSpiderfier(EoLMap.map, spiderConfig);
   //end spiderfy
   
-  speedTest.infoWindow = new google.maps.InfoWindow();
-  speedTest.showMarkers();
-  google.maps.event.addListener(speedTest.map, 'idle', function(){record_history();}); //for back-button    //other option for event 'tilesloaded'
+  EoLMap.infoWindow = new google.maps.InfoWindow();
+  EoLMap.showMarkers();
+  google.maps.event.addListener(EoLMap.map, 'idle', function(){record_history();}); //for back-button    //other option for event 'tilesloaded'
   
 };
 
 //start back button
-function record_history()
-{
-    var current = {};
-    current.center = speedTest.map.getCenter();
-    current.zoom = speedTest.map.getZoom();
-    current.mapTypeId = speedTest.map.getMapTypeId();
-    statuz.push(current);
-    statuz_all.push(current);
-    
-    if(!initial_map) initial_map = current;
-}
-speedTest.back = function()
-{
-    if(statuz.length > 1) {
-        statuz.pop();
-        var current = statuz.pop();
-        speedTest.map.setOptions(current);
-        if(JSON.stringify(current) == JSON.stringify(initial_map)){
-            statuz = [];
-            statuz_all = [];
-        }
-    }
-}
-speedTest.next = function()
-{
-    if(statuz_all.length > 1) {
-        statuz_all.pop();
-        var current = statuz_all.pop();
-        speedTest.map.setOptions(current);
-        if(JSON.stringify(current) == JSON.stringify(initial_map)){
-            statuz = [];
-            statuz_all = [];
-        }
-    }
-}
 //end back button
 
-speedTest.showMarkers = function() {
-  speedTest.markers = [];
+EoLMap.showMarkers = function() {
+  EoLMap.markers = [];
 
-  if (speedTest.markerClusterer) {
-    speedTest.markerClusterer.clearMarkers();
+  if (EoLMap.markerClusterer) {
+    EoLMap.markerClusterer.clearMarkers();
   }
 
   var panel = $('markerlist');
   panel.innerHTML = '';
   
-  var numMarkers = speedTest.recs.length;
+  var numMarkers = EoLMap.recs.length;
   $('total_markers').innerHTML = numMarkers;
 
   for (var i = 0; i < numMarkers; i++) {
-    var titleText = speedTest.recs[i].catalogNumber;
+    var titleText = EoLMap.recs[i].catalogNumber;
     if (titleText === '') {
       titleText = 'No catalog number';
     }
@@ -326,7 +206,7 @@ speedTest.showMarkers = function() {
     item.appendChild(title);
     panel.appendChild(item);
 
-    var latLng = new google.maps.LatLng(speedTest.recs[i].lat, speedTest.recs[i].lon);
+    var latLng = new google.maps.LatLng(EoLMap.recs[i].lat, EoLMap.recs[i].lon);
     var imageUrl = 'http://chart.apis.google.com/chart?cht=mm&chs=24x32&chco=' + 'FFFFFF,008CFF,000000&ext=.png';
     var markerImage = new google.maps.MarkerImage(imageUrl, new google.maps.Size(24, 32));
     var marker = new google.maps.Marker({
@@ -335,10 +215,10 @@ speedTest.showMarkers = function() {
       'icon': "https://storage.googleapis.com/support-kms-prod/SNP_2752125_en_v0"
     });
 
-    var fn = speedTest.markerClickFunction(speedTest.recs[i], latLng);
+    var fn = EoLMap.markerClickFunction(EoLMap.recs[i], latLng);
     google.maps.event.addListener(marker, 'click', fn);
     google.maps.event.addDomListener(title, 'click', fn);
-    speedTest.markers.push(marker);
+    EoLMap.markers.push(marker);
     
     // /*
     //start spiderfy
@@ -351,17 +231,17 @@ speedTest.showMarkers = function() {
   // /*
   //start spiderfy
   markerSpiderfier.addListener('click', function(marker, e) {
-      speedTest.infoWindow.open(speedTest.map, marker);
+      EoLMap.infoWindow.open(EoLMap.map, marker);
   });
-  markerx = speedTest.markers;
-  markerSpiderfier.addListener('spiderfy', function(markerx) {speedTest.infoWindow.close();});
+  markerx = EoLMap.markers;
+  markerSpiderfier.addListener('spiderfy', function(markerx) {EoLMap.infoWindow.close();});
   //end spiderfy
   // */
   
-  window.setTimeout(speedTest.time, 0);
+  window.setTimeout(EoLMap.time, 0);
 };
 
-speedTest.markerClickFunction = function(pic, latlng) {
+EoLMap.markerClickFunction = function(pic, latlng) {
   return function(e) {
     e.cancelBubble = true;
     e.returnValue = false;
@@ -381,32 +261,32 @@ speedTest.markerClickFunction = function(pic, latlng) {
     if(pic.identifiedBy) {infoHtml += 'Identified by: ' + pic.identifiedBy + '<br/>';}
     infoHtml += '</div>';
     
-    speedTest.infoWindow.setContent(infoHtml);
-    speedTest.infoWindow.setPosition(latlng);
-    speedTest.infoWindow.open(speedTest.map);
+    EoLMap.infoWindow.setContent(infoHtml);
+    EoLMap.infoWindow.setPosition(latlng);
+    EoLMap.infoWindow.open(EoLMap.map);
   };
 };
 
-speedTest.clear = function() {
-  for (var i = 0, marker; marker = speedTest.markers[i]; i++) {
+EoLMap.clear = function() {
+  for (var i = 0, marker; marker = EoLMap.markers[i]; i++) {
     marker.setMap(null);
   }
 };
 
-speedTest.change = function() {
-  speedTest.clear();
-  speedTest.showMarkers();
+EoLMap.change = function() {
+  EoLMap.clear();
+  EoLMap.showMarkers();
 };
 
-speedTest.time = function() {
-  if (!document.getElementById("goRadioText")) {speedTest.markerClusterer = new MarkerClusterer(speedTest.map, speedTest.markers);}
+EoLMap.time = function() {
+  if (!document.getElementById("goRadioText")) {EoLMap.markerClusterer = new MarkerClusterer(EoLMap.map, EoLMap.markers);}
   else
   {
       if ($('goRadioText').innerHTML == "Clusters ON") {
-        speedTest.markerClusterer = new MarkerClusterer(speedTest.map, speedTest.markers);
+        EoLMap.markerClusterer = new MarkerClusterer(EoLMap.map, EoLMap.markers);
       } else {
-        for (var i = 0, marker; marker = speedTest.markers[i]; i++) {
-          marker.setMap(speedTest.map);
+        for (var i = 0, marker; marker = EoLMap.markers[i]; i++) {
+          marker.setMap(EoLMap.map);
         }
       }
   }

@@ -1,1 +1,51 @@
-#map-canvas { width:500px; height:400px; }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+#gmap {
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+#panel {
+    float: left;
+    height: 95%;
+    width: 17%;   /* 17%*/
+}
+
+#map-container {
+    /* margin-left: 300px;*/
+    height: 100%;
+    background: white; /* needed bec. fullscreen in Firefox makes background color black */
+}
+
+#map-canvas {
+    height: 100%; /* 100% */
+}
+
+#goBackUI:hover, #goNextUI:hover, #goOrigUI:hover, #goPanelUI:hover, #goFullUI:hover {
+    background: #e0ecff;
+}
+
+#goBackUI, #goNextUI, #goOrigUI, #goPanelUI, #goFullUI {
+background-color: #fff;
+border: 2px solid #fff;
+box-shadow: 0 2px 6px rgba(0,0,0,.3);
+cursor: pointer;
+float: left;
+text-align: center;
+}
+
+#goBackText, #goNextText, #goOrigText, #goPanelText, #goFullText {
+    color: rgb(25,25,25);
+    font-family: Arial,sans-serif;
+    font-size: 10px;
+    line-height: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
