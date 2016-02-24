@@ -1,13 +1,4 @@
-/**
- * @fileoverview This demo is used for MarkerClusterer. It will show 100 markers
- * using MarkerClusterer and count the time to show the difference between using
- * MarkerClusterer and without MarkerClusterer.
- * @author Luke Mahe (v2 author: Xiaoxi Wu)
- */
-
-function $(element) {
-  return document.getElementById(element);
-}
+function $(element) {return document.getElementById(element);}
 
 var EoLMap = {};
 
@@ -22,7 +13,6 @@ var markerSpiderfier = null;
 var statuz = [];        //for back button
 var statuz_all = [];    //for next button
 var initial_map = false;
-
 
 //start customized controls
 function CenterControl(controlDiv, map) {
@@ -220,23 +210,17 @@ EoLMap.showMarkers = function() {
     google.maps.event.addDomListener(title, 'click', fn);
     EoLMap.markers.push(marker);
     
-    // /*
     //start spiderfy
     markerSpiderfier.addMarker(marker); // Adds the Marker to OverlappingMarkerSpiderfier
     //end spiderfy
-    // */
     
   }//end looping of markers
   
-  // /*
   //start spiderfy
-  markerSpiderfier.addListener('click', function(marker, e) {
-      EoLMap.infoWindow.open(EoLMap.map, marker);
-  });
+  markerSpiderfier.addListener('click', function(marker, e) {EoLMap.infoWindow.open(EoLMap.map, marker);});
   markerx = EoLMap.markers;
   markerSpiderfier.addListener('spiderfy', function(markerx) {EoLMap.infoWindow.close();});
   //end spiderfy
-  // */
   
   window.setTimeout(EoLMap.time, 0);
 };

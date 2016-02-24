@@ -1,18 +1,12 @@
+function $(element) {return document.getElementById(element);}
 
 var EoLMap = {};
 EoLMap.map = null;
-
-var statuz = [];        //for back button
-var statuz_all = [];    //for next button
-var initial_map = false;
-
 var layer_0;
 
-
-function $(element) {
-  return document.getElementById(element);
-}
-
+var statuz      = [];   //for back button
+var statuz_all  = [];   //for next button
+var initial_map = false;
 
 //start customized controls
 function CenterControl(controlDiv, map) {
@@ -83,24 +77,12 @@ function CenterControl(controlDiv, map) {
         statuz_all = [];
         });
     
-    
     goPanelUI.addEventListener('click', function() {panelShowHide();});
     goFullUI.addEventListener('click', function() {goFullScreen();});
-    
 }
 //end customized controls
 
-
 function initialize() {
-    
-    // var options = {
-    //   'zoom': 3,      //2 has overlapping continents
-    //   'center': latlng,
-    //   'mapTypeId': google.maps.MapTypeId.ROADMAP,
-    //   'scaleControl': true
-    // };
-    
-    
     EoLMap.map = new google.maps.Map(document.getElementById('map-canvas'), {center: new google.maps.LatLng(data.center_lat, data.center_lon), zoom: 3, mapTypeId: google.maps.MapTypeId.ROADMAP, 'scaleControl': true});
 
     //start customized controls
@@ -112,7 +94,6 @@ function initialize() {
     //end customized controls
 
     EoLMap.map.enableKeyDragZoom();  //for key-drag-zoom
-
 
     layer_0 = new google.maps.FusionTablesLayer({
         query: {select: "'location'", from: data.tableID},
@@ -132,15 +113,7 @@ function initialize() {
     
     add_publishers();
     
-    
     google.maps.event.addListener(EoLMap.map, 'idle', function(){record_history();}); //for back-button    //other option for event 'tilesloaded'
-    
-    
-}
-
-function record_history()
-{
-    
 }
 
 function select_change() {
@@ -172,5 +145,3 @@ function add_publishers() {
         select.appendChild(opt);
     }
 }
-
-// google.maps.event.addDomListener(window, 'load', initialize);
