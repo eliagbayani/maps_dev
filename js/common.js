@@ -36,16 +36,16 @@ function goFullScreen()
           if ($('goPanelText').innerHTML == "Panel ON")
           {
               $('panel').style.height      = "500px";
-              $('panel').style.width       = "400px";
+              $('panel').style.width       = "200px"; //400
               $('map-canvas').style.height = "500px";
-              $('map-canvas').style.width  = "800px";
+              $('map-canvas').style.width  = "700px"; //800
           }
           else
           {
               $('panel').style.height      = "0px";
               $('panel').style.width       = "0px";
               $('map-canvas').style.height = "500px";
-              $('map-canvas').style.width  = "1200px";
+              $('map-canvas').style.width  = "900px"; //1200
           }
 
           if      (document.exitFullscreen) {document.exitFullscreen();} 
@@ -84,14 +84,14 @@ function exitHandler() {
         if ($('goPanelText').innerHTML == "Panel ON")
         {
             $('panel').style.height      = "500px";
-            $('panel').style.width       = "400px";
+            $('panel').style.width       = "200px"; //400
             $('map-canvas').style.height = "500px";
-            $('map-canvas').style.width  = "800px";
+            $('map-canvas').style.width  = "700px"; //800
         }
         else
         {
             $('map-canvas').style.height = "500px";
-            $('map-canvas').style.width  = "1200px";
+            $('map-canvas').style.width  = "900px"; //1200
         }
     }
     
@@ -132,30 +132,30 @@ function panelShowHide()
         if ($('goPanelText').innerHTML == "Panel ON")
         {
             $('panel').style.width       = "17%";
-            $('panel').style.height      = "500px";
+            $('panel').style.height      = "100%";
             $('map-canvas').style.width  = "83%";
         }
         else
         {
-            $('panel').style.width = "0px";
-            $('panel').style.height = "0px";
-            $('map-canvas').style.width = "100%";
+            $('panel').style.width       = "0px";
+            $('panel').style.height      = "0px";
+            $('map-canvas').style.width  = "100%";
         }
     }
-    else
+    else //not full screen
     {
         $('map-canvas').style.height = "500px";
         if ($('goPanelText').innerHTML == "Panel ON")
         {
-            $('panel').style.width       = "400px";
+            $('panel').style.width       = "200px"; //400
             $('panel').style.height      = "500px";
-            $('map-canvas').style.width  = "800px";
+            $('map-canvas').style.width  = "700px"; //800
         }
         else
         {
             $('panel').style.width      = "0px";
             $('panel').style.height     = "0px";
-            $('map-canvas').style.width = "1200px";
+            $('map-canvas').style.width = "900px"; //1200
         }
     }
     
