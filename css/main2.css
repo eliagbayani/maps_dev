@@ -15,7 +15,7 @@ body {
 #panel {
     float: left;
     height: 500px;
-    width: 400px;
+    width: 200px;
 }
 
 #map-container {
@@ -25,7 +25,7 @@ body {
 
 #map-canvas {
     height: 500px;
-    width: 800px;
+    width: 700px;
 }
 
 #goBackUI:hover, #goNextUI:hover, #goOrigUI:hover, #goPanelUI:hover, #goFullUI:hover {
