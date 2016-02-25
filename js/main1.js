@@ -45,7 +45,7 @@ EoLMap.init = function() {
   //end centering map
   
   var options = {
-    'zoom': 3,
+    'zoom': 2,
     'center': latlng,
     'mapTypeId': google.maps.MapTypeId.ROADMAP,
     'scaleControl': true

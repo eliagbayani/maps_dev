@@ -257,7 +257,7 @@ function CenterControl(controlDiv, map, ctrl_type) {
     // CSS for text
     var goPanelText = document.createElement('div');
     goPanelText.id = 'goPanelText';
-    goPanelText.innerHTML = 'Panel ON';
+    goPanelText.innerHTML = 'Panel OFF';
     goPanelUI.appendChild(goPanelText);
 
     // Set CSS for Full
