@@ -45,7 +45,7 @@ EoLMap.init = function() {
   //end centering map
   
   var options = {
-    'zoom': 3,      //2 has overlapping continents
+    'zoom': 3,
     'center': latlng,
     'mapTypeId': google.maps.MapTypeId.ROADMAP,
     'scaleControl': true
@@ -76,7 +76,8 @@ EoLMap.init = function() {
   EoLMap.infoWindow = new google.maps.InfoWindow();
   EoLMap.showMarkers();
   google.maps.event.addListener(EoLMap.map, 'idle', function(){record_history();}); //for back-button    //other option for event 'tilesloaded'
-
+  
+  
 };
 
 EoLMap.showMarkers = function() {
