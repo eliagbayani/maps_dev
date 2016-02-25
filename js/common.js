@@ -1,19 +1,21 @@
+var currCenter = "";
+
 function goFullScreen()
 {
+    currCenter = EoLMap.map.getCenter();
+    
     var elem = document.getElementById("gmap"); //gmap or map-container
     if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement )
-    {  // current working methods
+    {
         $('goFullText').innerHTML = "Fullscreen ON";
 
-        if ($('goPanelText').innerHTML == "Panel ON")
-        {
+        if ($('goPanelText').innerHTML == "Panel ON") {
             $('panel').style.height      = "100%";
             $('panel').style.width       = "17%";
             $('map-canvas').style.height = "100%";
             $('map-canvas').style.width  = "83%";
         }
-        else
-        {
+        else {
             $('panel').style.height      = "0px";
             $('panel').style.width       = "0px";
             $('map-canvas').style.height = "100%";
@@ -23,8 +25,7 @@ function goFullScreen()
         if      (elem.requestFullscreen)      {elem.requestFullscreen();}
         else if (elem.msRequestFullscreen)    {elem.msRequestFullscreen();}
         else if (elem.mozRequestFullScreen)   {elem.mozRequestFullScreen();}
-        else if (elem.webkitRequestFullscreen) 
-        {
+        else if (elem.webkitRequestFullscreen) {
             elem.style.width = "100%";
             elem.style.height = "100%";
             elem.webkitRequestFullscreen(); //Element.ALLOW_KEYBOARD_INPUT
@@ -48,16 +49,20 @@ function goFullScreen()
               $('map-canvas').style.width  = "900px"; //1200
           }
 
-          if      (document.exitFullscreen) {document.exitFullscreen();} 
-          else if (document.msExitFullscreen) {document.msExitFullscreen();} 
-          else if (document.mozCancelFullScreen) {document.mozCancelFullScreen();} 
+          if      (document.exitFullscreen) {document.exitFullscreen();}
+          else if (document.msExitFullscreen) {document.msExitFullscreen();}
+          else if (document.mozCancelFullScreen) {document.mozCancelFullScreen();}
           else if (document.webkitExitFullscreen) {
             elem.style.width = "";
             document.webkitExitFullscreen();
           }
     }
     
+    
+    
     google.maps.event.trigger(EoLMap.map, 'resize');
+    EoLMap.map.setCenter(currCenter);
+    
 }
 
 // start: listeners for fullscreenchanges
@@ -68,6 +73,7 @@ if (document.addEventListener) {
     document.addEventListener('MSFullscreenChange', exitHandler, false);
 }
 function exitHandler() {
+    
     if(is_full_screen)
     {
         if(!document.webkitIsFullScreen)
@@ -95,7 +101,11 @@ function exitHandler() {
         }
     }
     
+    
     google.maps.event.trigger(EoLMap.map, 'resize');
+    EoLMap.map.setCenter(currCenter);
+    
+    
 }
 // end: listeners for fullscreenchanges
 
@@ -158,8 +168,12 @@ function panelShowHide()
             $('map-canvas').style.width = "900px"; //1200
         }
     }
-    
+
+    currCenter = EoLMap.map.getCenter();
     google.maps.event.trigger(EoLMap.map, 'resize');
+    EoLMap.map.setCenter(currCenter);
+    
+    
 }
 
 //start back button
@@ -172,6 +186,8 @@ function record_history()
     statuz.push(current);
     statuz_all.push(current);
     if(!initial_map) initial_map = current;
+    currCenter = EoLMap.map.getCenter();
+    
 }
 EoLMap.back = function()
 {
