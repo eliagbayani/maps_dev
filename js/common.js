@@ -58,11 +58,8 @@ function goFullScreen()
           }
     }
     
-    
-    
     google.maps.event.trigger(EoLMap.map, 'resize');
     EoLMap.map.setCenter(currCenter);
-    
 }
 
 // start: listeners for fullscreenchanges
@@ -76,36 +73,29 @@ function exitHandler() {
     
     if(is_full_screen)
     {
-        if(!document.webkitIsFullScreen)
-        {
-            $('goFullText').innerHTML = "Fullscreen OFF2";
+        if(!document.webkitIsFullScreen) {
+            $('goFullText').innerHTML = "Fullscreen OFF";
             var elem = document.getElementById("gmap"); //gmap or map-container
             elem.style.width = "";
         }
-        if(document.mozFullScreen) $('goFullText').innerHTML = "Fullscreen ON2";
+        if(document.mozFullScreen) $('goFullText').innerHTML = "Fullscreen ON";
     }
-
-    if(!is_full_screen())
-    {
-        if ($('goPanelText').innerHTML == "Panel ON")
-        {
+    
+    if(!is_full_screen()) {
+        if ($('goPanelText').innerHTML == "Panel ON") {
             $('panel').style.height      = "500px";
             $('panel').style.width       = "200px"; //400
             $('map-canvas').style.height = "500px";
             $('map-canvas').style.width  = "700px"; //800
         }
-        else
-        {
+        else {
             $('map-canvas').style.height = "500px";
             $('map-canvas').style.width  = "900px"; //1200
         }
     }
     
-    
     google.maps.event.trigger(EoLMap.map, 'resize');
     EoLMap.map.setCenter(currCenter);
-    
-    
 }
 // end: listeners for fullscreenchanges
 
@@ -113,16 +103,13 @@ function is_full_screen()
 {
     var elem = document.getElementById("gmap"); //gmap or map-container
     if      (elem.requestFullscreen) {}
-    else if (elem.msRequestFullscreen)
-    {
+    else if (elem.msRequestFullscreen) {
         if (document.msFullscreenElement == true) return true;
     } 
-    else if (elem.mozRequestFullScreen)
-    {
+    else if (elem.mozRequestFullScreen) {
         if (document.mozFullScreen == true) return true;
     }
-    else if (elem.webkitRequestFullscreen)
-    {
+    else if (elem.webkitRequestFullscreen) {
         if (document.webkitIsFullScreen == true) return true;
     }
     return false;
@@ -130,9 +117,6 @@ function is_full_screen()
 
 function panelShowHide()
 {
-    // el.style.display = 'none';
-    // el.style.display = 'block';
-    
     if ($('goPanelText').innerHTML == "Panel ON") $('goPanelText').innerHTML = "Panel OFF";
     else                                          $('goPanelText').innerHTML = "Panel ON";
     
@@ -172,8 +156,6 @@ function panelShowHide()
     currCenter = EoLMap.map.getCenter();
     google.maps.event.trigger(EoLMap.map, 'resize');
     EoLMap.map.setCenter(currCenter);
-    
-    
 }
 
 //start back button
@@ -187,7 +169,6 @@ function record_history()
     statuz_all.push(current);
     if(!initial_map) initial_map = current;
     currCenter = EoLMap.map.getCenter();
-    
 }
 EoLMap.back = function()
 {
