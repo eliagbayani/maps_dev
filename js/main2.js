@@ -9,77 +9,6 @@ var statuz_all  = [];   //for next button
 var initial_map = false;
 
 //start customized controls
-function CenterControl(controlDiv, map) {
-
-    // Set CSS for GO BACK
-    var goBackUI = document.createElement('div');
-    goBackUI.id = 'goBackUI';                       //.id here is used in HTML <style>
-    goBackUI.title = 'Go back one step';
-    controlDiv.appendChild(goBackUI);
-    // CSS for text
-    var goBackText = document.createElement('div');
-    goBackText.id = 'goBackText';
-    goBackText.innerHTML = 'Go Back';
-    goBackUI.appendChild(goBackText);
-
-    // Set CSS for GO NEXT
-    var goNextUI = document.createElement('div');
-    goNextUI.id = "goNextUI";
-    goNextUI.title = 'Move forward one step';
-    controlDiv.appendChild(goNextUI);
-    // CSS for text
-    var goNextText = document.createElement('div');
-    goNextText.id = 'goNextText';
-    goNextText.innerHTML = 'Move Next';
-    goNextUI.appendChild(goNextText);
-
-    // Set CSS for GO ORIGINAL POS
-    var goOrigUI = document.createElement('div');
-    goOrigUI.id = "goOrigUI";
-    goOrigUI.title = 'Back to original map';
-    controlDiv.appendChild(goOrigUI);
-    // CSS for text
-    var goOrigText = document.createElement('div');
-    goOrigText.id = 'goOrigText';
-    goOrigText.innerHTML = 'Initial Map';
-    goOrigUI.appendChild(goOrigText);
-
-
-    // Set CSS for Panel
-    var goPanelUI = document.createElement('div');
-    goPanelUI.id = "goPanelUI";
-    goPanelUI.title = 'Toggle Panel';
-    controlDiv.appendChild(goPanelUI);
-    // CSS for text
-    var goPanelText = document.createElement('div');
-    goPanelText.id = 'goPanelText';
-    goPanelText.innerHTML = 'Panel ON';
-    goPanelUI.appendChild(goPanelText);
-
-//===========
-    // Set CSS for Full
-    var goFullUI = document.createElement('div');
-    goFullUI.id = "goFullUI";
-    goFullUI.title = 'Toggle Fullscreen';
-    controlDiv.appendChild(goFullUI);
-    // CSS for text
-    var goFullText = document.createElement('div');
-    goFullText.id = 'goFullText';
-    goFullText.innerHTML = 'Fullscreen OFF orig';
-    goFullUI.appendChild(goFullText);
-//===========
-
-    // Set up the click event listener
-    goBackUI.addEventListener('click', function() {EoLMap.back();});
-    goNextUI.addEventListener('click', function() {EoLMap.next();});
-    goOrigUI.addEventListener('click', function() {EoLMap.map.setOptions(initial_map);
-        statuz = [];
-        statuz_all = [];
-        });
-    
-    goPanelUI.addEventListener('click', function() {panelShowHide();});
-    goFullUI.addEventListener('click', function() {goFullScreen();});
-}
 //end customized controls
 
 function initialize() {
@@ -87,7 +16,7 @@ function initialize() {
 
     //start customized controls
       var centerControlDiv = document.createElement('div');
-      var centerControl = new CenterControl(centerControlDiv, EoLMap.map);
+      var centerControl = new CenterControl(centerControlDiv, EoLMap.map, 2);
       centerControlDiv.index = 1;
       centerControlDiv.style['padding-top'] = '10px';
       EoLMap.map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);

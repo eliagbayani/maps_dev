@@ -195,3 +195,90 @@ EoLMap.next = function()
     }
 }
 //end back button
+
+//start customized controls
+function CenterControl(controlDiv, map, ctrl_type) {
+    
+    // Set CSS for GO BACK
+    var goBackUI = document.createElement('div');
+    goBackUI.id = 'goBackUI';                       //.id here is used in HTML <style>
+    goBackUI.title = 'Go back one step';
+    controlDiv.appendChild(goBackUI);
+    // CSS for text
+    var goBackText = document.createElement('div');
+    goBackText.id = 'goBackText';
+    goBackText.innerHTML = 'Go Back';
+    goBackUI.appendChild(goBackText);
+
+    // Set CSS for GO NEXT
+    var goNextUI = document.createElement('div');
+    goNextUI.id = "goNextUI";
+    goNextUI.title = 'Move forward one step';
+    controlDiv.appendChild(goNextUI);
+    // CSS for text
+    var goNextText = document.createElement('div');
+    goNextText.id = 'goNextText';
+    goNextText.innerHTML = 'Move Next';
+    goNextUI.appendChild(goNextText);
+
+    // Set CSS for GO ORIGINAL POS
+    var goOrigUI = document.createElement('div');
+    goOrigUI.id = "goOrigUI";
+    goOrigUI.title = 'Back to original map';
+    controlDiv.appendChild(goOrigUI);
+    // CSS for text
+    var goOrigText = document.createElement('div');
+    goOrigText.id = 'goOrigText';
+    goOrigText.innerHTML = 'Initial Map';
+    goOrigUI.appendChild(goOrigText);
+
+    if(ctrl_type == 1)
+    {
+        // Set CSS for Radio
+        var goRadioUI = document.createElement('div');
+        goRadioUI.id = "goRadioUI";
+        goRadioUI.title = 'Toggle Clustering';
+        controlDiv.appendChild(goRadioUI);
+        // CSS for text
+        var goRadioText = document.createElement('div');
+        goRadioText.id = 'goRadioText';
+        goRadioText.innerHTML = 'Clusters ON';
+        goRadioUI.appendChild(goRadioText);
+
+        // Set up the click event listener
+        goRadioUI.addEventListener('click', function() {clustersOnOff();});
+    }
+
+    // Set CSS for Panel
+    var goPanelUI = document.createElement('div');
+    goPanelUI.id = "goPanelUI";
+    goPanelUI.title = 'Toggle Panel';
+    controlDiv.appendChild(goPanelUI);
+    // CSS for text
+    var goPanelText = document.createElement('div');
+    goPanelText.id = 'goPanelText';
+    goPanelText.innerHTML = 'Panel ON';
+    goPanelUI.appendChild(goPanelText);
+
+    // Set CSS for Full
+    var goFullUI = document.createElement('div');
+    goFullUI.id = "goFullUI";
+    goFullUI.title = 'Toggle Fullscreen';
+    controlDiv.appendChild(goFullUI);
+    // CSS for text
+    var goFullText = document.createElement('div');
+    goFullText.id = 'goFullText';
+    goFullText.innerHTML = 'Fullscreen OFF';
+    goFullUI.appendChild(goFullText);
+
+    // Set up the click event listener
+    goBackUI.addEventListener('click', function() {EoLMap.back();});
+    goNextUI.addEventListener('click', function() {EoLMap.next();});
+    goOrigUI.addEventListener('click', function() {EoLMap.map.setOptions(initial_map);
+        statuz = [];
+        statuz_all = [];
+    });
+    goPanelUI.addEventListener('click', function() {panelShowHide();});
+    goFullUI.addEventListener('click', function() {goFullScreen();});
+}
+//end customized controls
