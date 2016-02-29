@@ -6,7 +6,6 @@ var statuz      = [];   //for back button
 var statuz_all  = [];   //for next button
 var initial_map = false;
 
-// function initialize() {
 EoLMap.init = function() {
     EoLMap.map = new google.maps.Map(document.getElementById('map-canvas'), {center: new google.maps.LatLng(data.center_lat, data.center_lon), zoom: 3, mapTypeId: google.maps.MapTypeId.ROADMAP, 'scaleControl': true});
 
