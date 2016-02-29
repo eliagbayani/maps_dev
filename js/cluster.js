@@ -1,20 +1,14 @@
-function $(element) {return document.getElementById(element);}
+var EoLMap              = {};
+EoLMap.recs             = null;
+EoLMap.map              = null;
+EoLMap.markerClusterer  = null;
+EoLMap.markers          = [];
+EoLMap.infoWindow       = null;
 
-var EoLMap = {};
-EoLMap.recs = null;
-EoLMap.map = null;
-EoLMap.markerClusterer = null;
-EoLMap.markers = [];
-EoLMap.infoWindow = null;
-
-var markerSpiderfier = null;
-
-var statuz = [];        //for back button
-var statuz_all = [];    //for next button
-var initial_map = false;
-
-//start customized controls
-//end customized controls
+var markerSpiderfier = null;    //for spiderfy
+var statuz      = [];           //for back button
+var statuz_all  = [];           //for next button
+var initial_map = false;        //for original map
 
 function clustersOnOff()
 {
@@ -28,11 +22,10 @@ function get_center_lat_long()
     var bound = new google.maps.LatLngBounds();
     EoLMap.recs = data.records;
     var numMarkers = EoLMap.recs.length;
-    for (var i = 0; i < numMarkers; i++) 
+    for (var i = 0; i < numMarkers; i++)
     {
       bound.extend( new google.maps.LatLng(EoLMap.recs[i].lat, EoLMap.recs[i].lon) );
     }
-    // console.log( bound.getCenter() );
     return bound.getCenter();
 }
 
@@ -40,7 +33,6 @@ EoLMap.init = function() {
 
   //start centering map
   center_latlong = get_center_lat_long()
-  // var latlng = new google.maps.LatLng(39.91, 116.38);
   var latlng = new google.maps.LatLng(center_latlong.lat(), center_latlong.lng());
   //end centering map
   
@@ -48,35 +40,29 @@ EoLMap.init = function() {
     'zoom': 2,
     'center': latlng,
     'mapTypeId': google.maps.MapTypeId.ROADMAP,
-    'scaleControl': true
-  };
+    'scaleControl': true};
 
   EoLMap.map = new google.maps.Map($('map-canvas'), options);
 
   //start customized controls
-    var centerControlDiv = document.createElement('div');
-    var centerControl = new CenterControl(centerControlDiv, EoLMap.map, 1);
-    centerControlDiv.index = 1;
-    centerControlDiv.style['padding-top'] = '10px';
-    EoLMap.map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+  var centerControlDiv = document.createElement('div');
+  var centerControl = new CenterControl(centerControlDiv, EoLMap.map, 1);
+  centerControlDiv.index = 1;
+  centerControlDiv.style['padding-top'] = '10px';
+  EoLMap.map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
   //end customized controls
 
   EoLMap.recs = data.records;
   EoLMap.map.enableKeyDragZoom();  //for key-drag-zoom
   
   //start spiderfy
-  var spiderConfig = {
-          keepSpiderfied: true,
-          event: 'mouseover'
-      };
-      
+  var spiderConfig = {keepSpiderfied: true, event: 'mouseover'};
   markerSpiderfier = new OverlappingMarkerSpiderfier(EoLMap.map, spiderConfig);
   //end spiderfy
   
   EoLMap.infoWindow = new google.maps.InfoWindow();
   EoLMap.showMarkers();
   google.maps.event.addListener(EoLMap.map, 'idle', function(){record_history();}); //for back-button    //other option for event 'tilesloaded'
-  
   
 };
 
@@ -161,9 +147,7 @@ EoLMap.markerClickFunction = function(pic, latlng) {
 };
 
 EoLMap.clear = function() {
-  for (var i = 0, marker; marker = EoLMap.markers[i]; i++) {
-    marker.setMap(null);
-  }
+  for (var i = 0, marker; marker = EoLMap.markers[i]; i++) {marker.setMap(null);}
 };
 
 EoLMap.change = function() {
@@ -172,15 +156,14 @@ EoLMap.change = function() {
 };
 
 EoLMap.time = function() {
-  if (!document.getElementById("goRadioText")) {EoLMap.markerClusterer = new MarkerClusterer(EoLMap.map, EoLMap.markers);}
-  else
-  {
-      if ($('goRadioText').innerHTML == "Clusters ON") {
-        EoLMap.markerClusterer = new MarkerClusterer(EoLMap.map, EoLMap.markers);
-      } else {
-        for (var i = 0, marker; marker = EoLMap.markers[i]; i++) {
-          marker.setMap(EoLMap.map);
+    if (!document.getElementById("goRadioText")) {EoLMap.markerClusterer = new MarkerClusterer(EoLMap.map, EoLMap.markers);}
+    else
+    {
+        if ($('goRadioText').innerHTML == "Clusters ON") {
+            EoLMap.markerClusterer = new MarkerClusterer(EoLMap.map, EoLMap.markers);
+        } 
+        else {
+            for (var i = 0, marker; marker = EoLMap.markers[i]; i++) {marker.setMap(EoLMap.map);}
         }
-      }
-  }
+    }
 };

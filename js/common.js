@@ -1,3 +1,5 @@
+function $(element) {return document.getElementById(element);}
+
 var currCenter = "";
 
 function goFullScreen()
@@ -199,7 +201,7 @@ EoLMap.next = function()
 //start customized controls
 function CenterControl(controlDiv, map, ctrl_type) {
     
-    // Set CSS for GO BACK
+    // Set GO BACK button
     var goBackUI = document.createElement('div');
     goBackUI.id = 'goBackUI';                       //.id here is used in HTML <style>
     goBackUI.title = 'Go back one step';
@@ -210,7 +212,7 @@ function CenterControl(controlDiv, map, ctrl_type) {
     goBackText.innerHTML = 'Go Back';
     goBackUI.appendChild(goBackText);
 
-    // Set CSS for GO NEXT
+    // Set MOVE NEXT button
     var goNextUI = document.createElement('div');
     goNextUI.id = "goNextUI";
     goNextUI.title = 'Move forward one step';
@@ -221,7 +223,7 @@ function CenterControl(controlDiv, map, ctrl_type) {
     goNextText.innerHTML = 'Move Next';
     goNextUI.appendChild(goNextText);
 
-    // Set CSS for GO ORIGINAL POS
+    // Set Original pos button
     var goOrigUI = document.createElement('div');
     goOrigUI.id = "goOrigUI";
     goOrigUI.title = 'Back to original map';
@@ -232,9 +234,9 @@ function CenterControl(controlDiv, map, ctrl_type) {
     goOrigText.innerHTML = 'Initial Map';
     goOrigUI.appendChild(goOrigText);
 
-    if(ctrl_type == 1)
+    if(ctrl_type == 1) //for Cluster maps
     {
-        // Set CSS for Radio
+        // Set Cluster button
         var goRadioUI = document.createElement('div');
         goRadioUI.id = "goRadioUI";
         goRadioUI.title = 'Toggle Clustering';
@@ -249,7 +251,7 @@ function CenterControl(controlDiv, map, ctrl_type) {
         goRadioUI.addEventListener('click', function() {clustersOnOff();});
     }
 
-    // Set CSS for Panel
+    // Set Panel button
     var goPanelUI = document.createElement('div');
     goPanelUI.id = "goPanelUI";
     goPanelUI.title = 'Toggle Panel';
@@ -260,7 +262,7 @@ function CenterControl(controlDiv, map, ctrl_type) {
     goPanelText.innerHTML = 'Panel OFF';
     goPanelUI.appendChild(goPanelText);
 
-    // Set CSS for Full
+    // Set Fullscreen button
     var goFullUI = document.createElement('div');
     goFullUI.id = "goFullUI";
     goFullUI.title = 'Toggle Fullscreen';

@@ -21,9 +21,7 @@
     width: 900px;   /* 700px Panel ON*/
 }
 
-#goBackUI:hover, #goNextUI:hover, #goOrigUI:hover, #goPanelUI:hover, #goFullUI:hover {
-    background: #e0ecff;
-}
+#goBackUI:hover, #goNextUI:hover, #goOrigUI:hover, #goPanelUI:hover, #goFullUI:hover {background: #e0ecff;}
 
 #goBackUI, #goNextUI, #goOrigUI, #goPanelUI, #goFullUI {
 background-color: #fff;
