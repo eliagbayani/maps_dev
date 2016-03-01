@@ -24,7 +24,7 @@ function get_center_lat_long()
     var numMarkers = EoLMap.recs.length;
     for (var i = 0; i < numMarkers; i++)
     {
-      bound.extend( new google.maps.LatLng(EoLMap.recs[i].lat, EoLMap.recs[i].lon) );
+      bound.extend( new google.maps.LatLng(EoLMap.recs[i].h, EoLMap.recs[i].i) ); //h=lat ; i=lon
     }
     return bound.getCenter();
 }
@@ -80,7 +80,7 @@ EoLMap.showMarkers = function() {
   $('total_markers').innerHTML = numMarkers;
 
   for (var i = 0; i < numMarkers; i++) {
-    var titleText = EoLMap.recs[i].catalogNumber;
+    var titleText = EoLMap.recs[i].a; //catalogNumber
     if (titleText === '') {
       titleText = 'No catalog number';
     }
@@ -94,7 +94,7 @@ EoLMap.showMarkers = function() {
     item.appendChild(title);
     panel.appendChild(item);
 
-    var latLng = new google.maps.LatLng(EoLMap.recs[i].lat, EoLMap.recs[i].lon);
+    var latLng = new google.maps.LatLng(EoLMap.recs[i].h, EoLMap.recs[i].i); //h=lat ; i=lon
     var marker = new google.maps.Marker({
       'position': latLng,
       'icon': "https://storage.googleapis.com/support-kms-prod/SNP_2752125_en_v0"
@@ -128,9 +128,39 @@ EoLMap.markerClickFunction = function(pic, latlng) {
       e.stopPropagation();
       e.preventDefault();
     }
+    
+    /*
+    $header['a'] = "catalogNumber";
+    $header['b'] = "sciname";
+    $header['c'] = "publisher";
+    $header['d'] = "publisher_id";
+    $header['e'] = "dataset";
+    $header['f'] = "dataset_id";
+    $header['g'] = "gbifID";
+    $header['h'] = "lat";
+    $header['i'] = "lon";
+    $header['j'] = "recordedBy";
+    $header['k'] = "identifiedBy";
+    $header['l'] = "pic_url";
+    $header['m'] = "eventDate";
+    */
+    
+    var title = pic.b;                                                                                                              //sciname
+    var infoHtml = '<div class="info"><h3>' + title + '</h3>';
+    if(pic.l)       {infoHtml += '<div class="info-body"><img src="' + pic.l + '" class="info-img"/></div><br/>';}                  //pic_url
+    if(pic.a) {infoHtml += 'Catalog number: ' + pic.a + '<br/>';}                                                                   //catalogNumber
+    infoHtml += 'Source portal: <a href="http://www.gbif.org/occurrence/' + pic.g + '" target="_blank">GBIF data</a>' + '<br/>' +   //gbifID
+                'Publisher: <a href="http://www.gbif.org/publisher/' + pic.d + '" target="_blank">' + pic.c + '</a><br/>' +         //publisher_id & publisher
+                'Dataset: <a href="http://www.gbif.org/dataset/' + pic.f + '" target="_blank">' + pic.e + '</a><br/>';              //dataset_id & dataset
+    if(pic.j)   {infoHtml += 'Recorded by: ' + pic.j + '<br/>';}                                                                    //recordedBy
+    if(pic.k) {infoHtml += 'Identified by: ' + pic.k + '<br/>';}                                                                    //identifiedBy
+    if(pic.m) {infoHtml += 'Event date: ' + pic.m + '<br/>';}                                                                       //eventDate
+    infoHtml += '</div>';
+    
+    
+    /*
     var title = pic.sciname;
     var infoHtml = '<div class="info"><h3>' + title + '</h3>';
-
     if(pic.pic_url)       {infoHtml += '<div class="info-body"><img src="' + pic.pic_url + '" class="info-img"/></div><br/>';}
     if(pic.catalogNumber) {infoHtml += 'Catalog number: ' + pic.catalogNumber + '<br/>';}
     infoHtml += 'Source portal: <a href="http://www.gbif.org/occurrence/' + pic.gbifID + '" target="_blank">GBIF data</a>' + '<br/>' +
@@ -139,8 +169,8 @@ EoLMap.markerClickFunction = function(pic, latlng) {
     if(pic.recordedBy)   {infoHtml += 'Recorded by: ' + pic.recordedBy + '<br/>';}
     if(pic.identifiedBy) {infoHtml += 'Identified by: ' + pic.identifiedBy + '<br/>';}
     if(pic.eventDate) {infoHtml += 'Date recorded: ' + pic.eventDate + '<br/>';}
-    
     infoHtml += '</div>';
+    */
     
     EoLMap.infoWindow.setContent(infoHtml);
     EoLMap.infoWindow.setPosition(latlng);

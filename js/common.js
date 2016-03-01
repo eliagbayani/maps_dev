@@ -2,6 +2,23 @@ function $(element) {return document.getElementById(element);}
 
 var currCenter = "";
 
+/*
+$header['a'] = "catalogNumber";
+$header['b'] = "sciname";
+$header['c'] = "publisher";
+$header['d'] = "publisher_id";
+$header['e'] = "dataset";
+$header['f'] = "dataset_id";
+$header['g'] = "gbifID";
+$header['h'] = "lat";
+$header['i'] = "lon";
+$header['j'] = "recordedBy";
+$header['k'] = "identifiedBy";
+$header['l'] = "pic_url";
+$header['m'] = "eventDate";
+*/
+
+
 function goFullScreen()
 {
     currCenter = EoLMap.map.getCenter();
