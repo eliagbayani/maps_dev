@@ -138,6 +138,8 @@ EoLMap.markerClickFunction = function(pic, latlng) {
                 'Dataset: <a href="http://www.gbif.org/dataset/' + pic.dataset_id + '" target="_blank">' + pic.dataset + '</a><br/>';
     if(pic.recordedBy)   {infoHtml += 'Recorded by: ' + pic.recordedBy + '<br/>';}
     if(pic.identifiedBy) {infoHtml += 'Identified by: ' + pic.identifiedBy + '<br/>';}
+    if(pic.eventDate) {infoHtml += 'Date recorded: ' + pic.eventDate + '<br/>';}
+    
     infoHtml += '</div>';
     
     EoLMap.infoWindow.setContent(infoHtml);
