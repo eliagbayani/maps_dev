@@ -19,6 +19,11 @@ https://developers.google.com/maps/documentation/javascript/examples/layer-fusio
 https://developers.google.com/fusiontables/docs/samples/adv_fusiontables
 https://developers.google.com/fusiontables/docs/sample_code#FTLayers
 
+========================================================================================================
+half-degree cell = 0.5 x 0.5 = approx. 50 x 35 km
+156543.03392 (px/m)
+
+
 
 ========================================================================================================
 KML layers
