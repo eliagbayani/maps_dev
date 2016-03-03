@@ -14,6 +14,7 @@ Fusion maps:    183     Feb 29
                 
 
 ========================================================================================================
+Fusion tables / layers:
 https://developers.google.com/fusiontables/docs/v2/reference/table/update
 https://developers.google.com/maps/documentation/javascript/examples/layer-fusiontables-heatmap
 https://developers.google.com/fusiontables/docs/samples/adv_fusiontables
@@ -24,6 +25,12 @@ half-degree cell = 0.5 x 0.5 = approx. 50 x 35 km
 156543.03392 (px/m)
 
 
+
+========================================================================================================
+other possible info on revised Cluster options:
+https://github.com/tuupola/php_google_maps/blob/master/Google/Maps/Clusterer/Distance.php
+http://gis.stackexchange.com/questions/7430/what-ratio-scales-do-google-maps-zoom-levels-correspond-to
+https://github.com/ivanmaeder/clusters/tree/master/tests
 
 ========================================================================================================
 KML layers
@@ -45,7 +52,33 @@ https://developers.google.com/maps/documentation/javascript/examples/layer-kml
 
 working example: http://jsfiddle.net/Shreerang/sxNy9/7/light/
 ========================================================================================================
+http://superuser.com/questions/324756/how-can-i-compress-a-large-file-into-smaller-parts
+
+This will compress file /path/to/your/large/file and creates many files with the prefix compressed.gz in the current directory, each file with a maximum size of 150 000 000 bytes:
+
+gzip -c /path/to/your/large/file | split -b 150000000 - compressed.gz
+
+Uncompress single file:
+To uncompress the file resulting in the uncompressed file "/path/to/decrompressed/file" compressed using the command above use:
+
+cat compressed.gz* | zcat > /path/to/decrompressed/file
+
 ========================================================================================================
+1 GB = 1,073,741,824 bytes
+     ~ 1,000,000,000 bytes (9 zeros)
+1 MB = 1,048,576 byes
+     ~ 1,000,000 (6 zeros)
+     
+gzip -c /path/to/your/large/file | split -b 1000000 - compressed.gz
 ========================================================================================================
-========================================================================================================
+actual:
+
+to compress into multiple:
+gzip -c sample.zip | split -b 1000000 - multiple.gz
+
+to decompress from multiple files:
+cat multiple.gz* | zcat > final.zip
+
+
+
 ========================================================================================================
