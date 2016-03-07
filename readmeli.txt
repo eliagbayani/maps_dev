@@ -74,10 +74,16 @@ gzip -c /path/to/your/large/file | split -b 1000000 - compressed.gz
 actual:
 
 to compress into multiple:
-gzip -c sample.zip | split -b 1000000 - multiple.gz
+gzip -c gbif.zip | split -b 1000000000 - multiple.gz
 
 to decompress from multiple files:
 cat multiple.gz* | zcat > final.zip
+
+
+nohup bash -c "gzip -c gbif.zip | split -b 1000000000 - multiple.gz"
+
+nohup bash -c "cat multiple.gz* | zcat > final.zip"
+
 
 
 
