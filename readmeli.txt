@@ -82,9 +82,11 @@ cat multiple.gz* | zcat > final.zip
 
 nohup bash -c "gzip -c gbif.zip | split -b 1000000000 - multiple.gz"
 
-nohup bash -c "cat multiple.gz* | zcat > final.zip"
+nohup bash -c "cat multiple.gz* | zcat > gbif.zip"
 
+*unzip is not so robust, when unzipping try this: 
+jar xvf gbif.zip
 
-
+1 000 000 000
 
 ========================================================================================================

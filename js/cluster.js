@@ -53,6 +53,9 @@ EoLMap.init = function() {
   //end customized controls
 
   EoLMap.recs = data.records;
+  $('total_markers').innerHTML = data.actual + "<br>Plotted: " + data.count;
+  
+  
   EoLMap.map.enableKeyDragZoom();  //for key-drag-zoom
   
   //start spiderfy
@@ -77,7 +80,7 @@ EoLMap.showMarkers = function() {
   panel.innerHTML = '';
   
   var numMarkers = EoLMap.recs.length;
-  $('total_markers').innerHTML = numMarkers;
+  // $('total_markers').innerHTML = numMarkers;
 
   for (var i = 0; i < numMarkers; i++) {
     var titleText = EoLMap.recs[i].a; //catalogNumber
