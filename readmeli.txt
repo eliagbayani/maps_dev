@@ -87,6 +87,17 @@ nohup bash -c "cat multiple.gz* | zcat > gbif.zip"
 *unzip is not so robust, when unzipping try this: 
 jar xvf gbif.zip
 
-1 000 000 000
+1 000 000 000 = 1 GB
+500 000 000 = 500 MB
+
+
+1. tar -zcvf camera.tar.gz "Camera Uploads/"
+2. gzip -c camera.tar.gz | split -b 10000000 - multiple.gz
+3. cat multiple.gz* | zcat > camera2.tar.gz
+
+this works ok:
+create archives : tar cz "eoearth_images" | split -b 50000000 - ./eoearth_images_zip/split.tgz_
+uncompress      : cat split.tgz_* | tar xz
+
 
 ========================================================================================================
