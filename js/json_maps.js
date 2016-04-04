@@ -1,44 +1,25 @@
-function $(element) {return document.getElementById(element);}
-
 var currCenter = "";
-
-/*
-$header['a'] = "catalogNumber";
-$header['b'] = "sciname";
-$header['c'] = "publisher";
-$header['d'] = "publisher_id";
-$header['e'] = "dataset";
-$header['f'] = "dataset_id";
-$header['g'] = "gbifID";
-$header['h'] = "lat";
-$header['i'] = "lon";
-$header['j'] = "recordedBy";
-$header['k'] = "identifiedBy";
-$header['l'] = "pic_url";
-$header['m'] = "eventDate";
-*/
-
 
 function goFullScreen()
 {
     currCenter = EoLMap.map.getCenter();
-    
-    var elem = document.getElementById("gmap"); //gmap or map-container
+
+    var elem = document.getElementById("gmap"); // gmap or map-container
     if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement )
     {
-        $('goFullText').innerHTML = "Fullscreen ON";
+        $('#goFullText')[0].innerHTML = "Fullscreen ON";
 
-        if ($('goPanelText').innerHTML == "Panel ON") {
-            $('panel').style.height      = "100%";
-            $('panel').style.width       = "17%";
-            $('map-canvas').style.height = "100%";
-            $('map-canvas').style.width  = "83%";
+        if ($('#goPanelText')[0].innerHTML == "Panel ON") {
+            $('#panel')[0].style.height      = "100%";
+            $('#panel')[0].style.width       = "17%";
+            $('#map-canvas')[0].style.height = "100%";
+            $('#map-canvas')[0].style.width  = "83%";
         }
         else {
-            $('panel').style.height      = "0px";
-            $('panel').style.width       = "0px";
-            $('map-canvas').style.height = "100%";
-            $('map-canvas').style.width  = "100%";
+            $('#panel')[0].style.height      = "0px";
+            $('#panel')[0].style.width       = "0px";
+            $('#map-canvas')[0].style.height = "100%";
+            $('#map-canvas')[0].style.width  = "100%";
         }
 
         if      (elem.requestFullscreen)      {elem.requestFullscreen();}
@@ -52,20 +33,20 @@ function goFullScreen()
     }
     else
     {
-          $('goFullText').innerHTML = "Fullscreen OFF";
-          if ($('goPanelText').innerHTML == "Panel ON")
+          $('#goFullText')[0].innerHTML = "Fullscreen OFF";
+          if ($('#goPanelText')[0].innerHTML == "Panel ON")
           {
-              $('panel').style.height      = "500px";
-              $('panel').style.width       = "200px"; //400
-              $('map-canvas').style.height = "500px";
-              $('map-canvas').style.width  = "700px"; //800
+              $('#panel')[0].style.height      = "500px";
+              $('#panel')[0].style.width       = "200px"; //400
+              $('#map-canvas')[0].style.height = "500px";
+              $('#map-canvas')[0].style.width  = "700px"; //800
           }
           else
           {
-              $('panel').style.height      = "0px";
-              $('panel').style.width       = "0px";
-              $('map-canvas').style.height = "500px";
-              $('map-canvas').style.width  = "900px"; //1200
+              $('#panel')[0].style.height      = "0px";
+              $('#panel')[0].style.width       = "0px";
+              $('#map-canvas')[0].style.height = "500px";
+              $('#map-canvas')[0].style.width  = "900px"; //1200
           }
 
           if      (document.exitFullscreen) {document.exitFullscreen();}
@@ -76,7 +57,7 @@ function goFullScreen()
             document.webkitExitFullscreen();
           }
     }
-    
+
     google.maps.event.trigger(EoLMap.map, 'resize');
     EoLMap.map.setCenter(currCenter);
 }
@@ -89,30 +70,30 @@ if (document.addEventListener) {
     document.addEventListener('MSFullscreenChange', exitHandler, false);
 }
 function exitHandler() {
-    
+
     if(is_full_screen)
     {
         if(!document.webkitIsFullScreen) {
-            $('goFullText').innerHTML = "Fullscreen OFF";
+            $('#goFullText')[0].innerHTML = "Fullscreen OFF";
             var elem = document.getElementById("gmap"); //gmap or map-container
             elem.style.width = "";
         }
-        if(document.mozFullScreen) $('goFullText').innerHTML = "Fullscreen ON";
+        if(document.mozFullScreen) $('#goFullText')[0].innerHTML = "Fullscreen ON";
     }
-    
+
     if(!is_full_screen()) {
-        if ($('goPanelText').innerHTML == "Panel ON") {
-            $('panel').style.height      = "500px";
-            $('panel').style.width       = "200px"; //400
-            $('map-canvas').style.height = "500px";
-            $('map-canvas').style.width  = "700px"; //800
+        if ($('#goPanelText')[0].innerHTML == "Panel ON") {
+            $('#panel')[0].style.height      = "500px";
+            $('#panel')[0].style.width       = "200px"; //400
+            $('#map-canvas')[0].style.height = "500px";
+            $('#map-canvas')[0].style.width  = "700px"; //800
         }
         else {
-            $('map-canvas').style.height = "500px";
-            $('map-canvas').style.width  = "900px"; //1200
+            $('#map-canvas')[0].style.height = "500px";
+            $('#map-canvas')[0].style.width  = "900px"; //1200
         }
     }
-    
+
     google.maps.event.trigger(EoLMap.map, 'resize');
     EoLMap.map.setCenter(currCenter);
 }
@@ -124,7 +105,7 @@ function is_full_screen()
     if      (elem.requestFullscreen) {}
     else if (elem.msRequestFullscreen) {
         if (document.msFullscreenElement == true) return true;
-    } 
+    }
     else if (elem.mozRequestFullScreen) {
         if (document.mozFullScreen == true) return true;
     }
@@ -136,39 +117,39 @@ function is_full_screen()
 
 function panelShowHide()
 {
-    if ($('goPanelText').innerHTML == "Panel ON") $('goPanelText').innerHTML = "Panel OFF";
-    else                                          $('goPanelText').innerHTML = "Panel ON";
-    
+    if ($('#goPanelText')[0].innerHTML == "Panel ON") $('#goPanelText')[0].innerHTML = "Panel OFF";
+    else                                          $('#goPanelText')[0].innerHTML = "Panel ON";
+
     if (is_full_screen())
     {
-        $('map-canvas').style.height = "100%";
-        if ($('goPanelText').innerHTML == "Panel ON")
+        $('#map-canvas')[0].style.height = "100%";
+        if ($('#goPanelText')[0].innerHTML == "Panel ON")
         {
-            $('panel').style.width       = "17%";
-            $('panel').style.height      = "100%";
-            $('map-canvas').style.width  = "83%";
+            $('#panel')[0].style.width       = "17%";
+            $('#panel')[0].style.height      = "100%";
+            $('#map-canvas')[0].style.width  = "83%";
         }
         else
         {
-            $('panel').style.width       = "0px";
-            $('panel').style.height      = "0px";
-            $('map-canvas').style.width  = "100%";
+            $('#panel')[0].style.width       = "0px";
+            $('#panel')[0].style.height      = "0px";
+            $('#map-canvas')[0].style.width  = "100%";
         }
     }
     else //not full screen
     {
-        $('map-canvas').style.height = "500px";
-        if ($('goPanelText').innerHTML == "Panel ON")
+        $('#map-canvas')[0].style.height = "500px";
+        if ($('#goPanelText')[0].innerHTML == "Panel ON")
         {
-            $('panel').style.width       = "200px"; //400
-            $('panel').style.height      = "500px";
-            $('map-canvas').style.width  = "700px"; //800
+            $('#panel')[0].style.width       = "200px"; //400
+            $('#panel')[0].style.height      = "500px";
+            $('#map-canvas')[0].style.width  = "700px"; //800
         }
         else
         {
-            $('panel').style.width      = "0px";
-            $('panel').style.height     = "0px";
-            $('map-canvas').style.width = "900px"; //1200
+            $('#panel')[0].style.width      = "0px";
+            $('#panel')[0].style.height     = "0px";
+            $('#map-canvas')[0].style.width = "900px"; //1200
         }
     }
 
@@ -217,7 +198,7 @@ EoLMap.next = function()
 
 //start customized controls
 function CenterControl(controlDiv, map, ctrl_type) {
-    
+
     // Set GO BACK button
     var goBackUI = document.createElement('div');
     goBackUI.id = 'goBackUI';                       //.id here is used in HTML <style>
