@@ -15,7 +15,6 @@ text-align: center;
 
 #goRadioText {
     color: rgb(25,25,25);
-/*    font-family: Arial,sans-serif;*/
     font-size: 10px;
     line-height: 15px;
     padding-left: 5px;
@@ -60,5 +59,5 @@ text-align: center;
 }
 .info-img {
     height: auto;
-    width: 100%; /* you can use % */
+    width: 100%;
 }

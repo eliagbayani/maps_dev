@@ -1,14 +1,11 @@
 #gmap {
-    margin: 0;
-    padding: 0;
-/*    font-family: Arial;*/
-    font-size: 12px;
-}
+  margin: 0;
+  padding: 0; }
 
 #panel {
-    float: left;
-    height: 0px;    /* 500px Panel ON */
-    width: 0px;     /* 200px Panel ON */ 
+  float: left;
+  height: 0px;    /* 500px Panel ON */
+  width: 0px;     /* 200px Panel ON */ 
 }
 
 #map-container {
@@ -34,7 +31,6 @@
 
 #goBackText, #goNextText, #goOrigText, #goPanelText, #goFullText {
     color: rgb(25,25,25);
-/*    font-family: Arial,sans-serif;*/
     font-size: 10px;
     line-height: 15px;
     padding-left: 5px;
