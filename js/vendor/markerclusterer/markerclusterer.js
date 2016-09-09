@@ -188,9 +188,11 @@ function MarkerClusterer(map, opt_markers, opt_options) {
  * @private
  */
 MarkerClusterer.prototype.MARKER_CLUSTER_IMAGE_PATH_ =
+    'http://editors.eol.org/gmaps_markers/m';
+    /*
     'https://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/' +
     'images/m';
-
+    */
 
 /**
  * The marker cluster image path.

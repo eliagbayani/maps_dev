@@ -105,4 +105,7 @@ uncompress      : cat split.tgz_* | tar xz
 gmaps source code moves to github: 
 e.g. https://github.com/googlemaps/js-marker-clusterer
 
+value from: https://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m
+to: 
+
 
