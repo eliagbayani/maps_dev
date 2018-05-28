@@ -23,9 +23,6 @@ https://developers.google.com/fusiontables/docs/sample_code#FTLayers
 ========================================================================================================
 half-degree cell = 0.5 x 0.5 = approx. 50 x 35 km
 156543.03392 (px/m)
-
-
-
 ========================================================================================================
 other possible info on revised Cluster options:
 https://github.com/tuupola/php_google_maps/blob/master/Google/Maps/Clusterer/Distance.php
